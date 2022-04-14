@@ -35,6 +35,8 @@ import com.model2.mvc.service.user.UserService;
 //@ContextConfiguration(locations = { "classpath:config/context-common.xml" })
 public class UserServiceTest {
 
+	
+	
 	//==>@RunWith,@ContextConfiguration ภฬฟ๋ Wiring, Test วา instance DI
 	@Autowired
 	@Qualifier("userServiceImpl")
