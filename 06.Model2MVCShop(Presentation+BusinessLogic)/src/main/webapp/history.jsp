@@ -2,6 +2,8 @@
 
 <%@ page contentType="text/html; charset=EUC-KR" %>
 
+<%@ page import="java.net.URLDecoder" %>
+
 <html>
 <head>
 
@@ -21,7 +23,7 @@
 		for (int i = 0; i < cookies.length; i++) {
 			Cookie cookie = cookies[i];
 			if (cookie.getName().equals("history")) {
-				history = cookie.getValue();
+				history = URLDecoder.decode(cookie.getValue(),"euc-kr"); //원래 식에 이거만 추가
 			}
 		}
 		if (history != null) {

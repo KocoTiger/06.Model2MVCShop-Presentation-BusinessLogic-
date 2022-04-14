@@ -50,35 +50,32 @@ public class ProductController {
 
 		System.out.println("/addProductView.do");
 		
-		return "redirect:/product/addProductView.jsp";
+		return "forward:/product/addProductView.jsp";
 	}
 	
 	
 	
 	
 	
-	
+///////////////////////////////////////////////
 	@RequestMapping("/addProduct.do")
-	public String addProduct( @ModelAttribute("product") Product product ) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product, 
+			
+							  @RequestParam("manuDate") String manuDate ) throws Exception {
 
+		product.setManuDate(manuDate.replace("-", ""));
+		
+		//원래 sql 에 날짜 받아올때 했었던 것을 이렇게 바꿔야함
+		
 		System.out.println("/addProduct.do");
 		//Business Logic
 		productService.addProduct(product);
-		
-		
-		
-		
-		
-		
-		
-		return "redirect:/product/loginView.jsp";
+
+//////////////////////////////////////////		
+		return "forward:/product/addProductView.jsp";
 		
 		//이게 어디로 가면 좋을까
-		
-		
-		
-		
-		
+/////////////////////////////////////////
 		
 		
 	}
@@ -91,6 +88,9 @@ public class ProductController {
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
 		model.addAttribute("product", product);
+		
+		//setAttribute로 쓰고 value값이 들어간다면,
+		
 		
 		return "forward:/product/getProduct.jsp";
 	}
@@ -108,7 +108,7 @@ public class ProductController {
 		// Model 과 View 연결
 		model.addAttribute("product", product);
 		
-		return "forward:/product/updateProduct.jsp";
+		return "forward:/product/updateProductView.jsp";
 	}
 	
 
@@ -116,21 +116,21 @@ public class ProductController {
 ////Product에는 session정보를 사용할 수도 있고 안할 수도 있다 (선택)
 // ==>결론 : product에서는 안 써도 된다 
 	
-//	@RequestMapping("/updateProduct.do")
-//	public String updateProduct( @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
-//
-//		System.out.println("/updateProduct.do");
-//		//Business Logic
-//		productService.updateProduct(product);
-//		
+	@RequestMapping("/updateProduct.do")
+	public String updateProduct( @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
+
+		System.out.println("/updateProduct.do");
+		//Business Logic
+		productService.updateProduct(product);
+		
 //		int sessionId=((Product)session.getAttribute("product")).getProdNo();
 //		if(sessionId == (product.getProdNo())){
 //			session.setAttribute("product", product);
 //		}
-//		
-//		return "redirect:/getProduct.do?prodNo=" + product.getProdNo();
-//	}
-//	
+		
+		return "redirect:/getProduct.do?prodNo=" + product.getProdNo();
+	}
+	
 //	@RequestMapping("/loginView.do")
 //	public String loginView() throws Exception{
 //		
