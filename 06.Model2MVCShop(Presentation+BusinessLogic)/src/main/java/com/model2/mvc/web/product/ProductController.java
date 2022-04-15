@@ -193,6 +193,11 @@ public class ProductController {
 		}
 		search.setPageSize(pageSize);
 		
+		String menu = request.getParameter("menu");
+		
+		System.out.println(menu);
+		
+		
 		// Business logic ผ๖วเ
 		Map<String , Object> map = productService.getProductList(search);
 		
@@ -204,6 +209,6 @@ public class ProductController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		return "forward:/product/listProduct.jsp";
+		return "forward:/product/listProduct.jsp?menu="+menu;
 	}
 }
